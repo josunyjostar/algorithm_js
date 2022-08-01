@@ -16,16 +16,13 @@ function solution(arr) {
   let dy = Array.from({length: arr.length}, () => 0);
   for (let i = 0; i < arr.length; i++) {
     let temp = [];
-    for (let j = i - 1; j > 0; --j)
-      if (arr[j] < arr[i]) {
-        temp.push(dy[j]);
+    let max = 0;
+    for (let j = i - 1; j > 0; --j) {
+      if (arr[j] < arr[i] && dy[j] > max) {
+        max = dy[j];
       }
-    if (temp.length === 0) {
-      dy[i] = 1;
-    } else {
-      let max = Math.max(...temp);
-      dy[i] = max + 1;
     }
+    dy[i] = max + 1;
   }
   return dy;
 }
